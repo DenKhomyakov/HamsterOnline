@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="20251119125400" author="KhomyakovDA">
+
+        <createTable tableName="user" remarks="Пользователь">
+
+            <column name="id" type="UUID" remarks="ID пользователя">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="username" type="VARCHAR(50)" remarks="Имя пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tag" type="VARCHAR(50)" remarks="Тэг пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(200)" remarks="Описание пользователя">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="email" type="VARCHAR(100)" remarks="Электронная почта пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="profile_photo" type="BLOB" remarks="Фото профиля пользователя">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="sex_id" type="UUID" remarks="ID пола пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password_hash" type="VARCHAR(255)" remarks="Хэш пароля пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="DATETIME" remarks="Дата и время создания пользователя">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="user"
+                baseColumnNames="sex_id"
+                constraintName="fk_user_sex"
+                referencedTableName="sex"
+                referencedColumnNames="id"/>
+
+        <addUniqueConstraint
+                tableName="user"
+                columnNames="tag"
+                constraintName="uk_user_tag"/>
+
+        <addUniqueConstraint
+                tableName="user"
+                columnNames="email"
+                constraintName="uk_user_email"/>
+        
+        <createIndex tableName="user" indexName="idx_user_email">
+            <column name="email"/>
+        </createIndex>
+
+        <createIndex tableName="user" indexName="idx_user_tag">
+            <column name="tag"/>
+        </createIndex>
+        
+        <createIndex tableName="user" indexName="idx_user_created_at">
+            <column name="created_at"/>
+        </createIndex>
+
+        <rollback>
+
+            <dropTable tableName="user"/>
+
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

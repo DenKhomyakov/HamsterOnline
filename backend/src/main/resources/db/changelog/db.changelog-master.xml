@@ -7,4 +7,7 @@
 
     <include file="db/changelog/changes/20251116144000_initial_schema.xml"/>
 
+    <include file="db/changelog/changes/20251119131500_create_sex.xml"/>
+    <include file="db/changelog/changes/20251119125400_create_user.xml"/>
+
 </databaseChangeLog>

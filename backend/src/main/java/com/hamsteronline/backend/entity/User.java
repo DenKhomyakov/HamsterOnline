@@ -19,11 +19,11 @@ import java.util.UUID;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "user", uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "tag"),
         @UniqueConstraint(columnNames = "email")
 })
-public class UserDBO {
+public class User {
     /**
      * ID пользователя
      */
@@ -95,7 +95,7 @@ public class UserDBO {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public UserDBO(UserDBO original) {
+    public User(User original) {
      this.id = original.getId();
      this.username = original.getUsername();
      this.tag = original.getTag();

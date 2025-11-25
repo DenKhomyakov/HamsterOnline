@@ -7,7 +7,7 @@
 
     <changeSet id="20251119125400" author="KhomyakovDA">
 
-        <createTable tableName="user" remarks="Пользователь">
+        <createTable tableName="users" remarks="Пользователь">
 
             <column name="id" type="UUID" remarks="ID пользователя">
                 <constraints primaryKey="true" nullable="false"/>
@@ -48,37 +48,37 @@
         </createTable>
 
         <addForeignKeyConstraint
-                baseTableName="user"
+                baseTableName="users"
                 baseColumnNames="sex_id"
-                constraintName="fk_user_sex"
+                constraintName="fk_users_sex"
                 referencedTableName="sex"
                 referencedColumnNames="id"/>
 
         <addUniqueConstraint
-                tableName="user"
+                tableName="users"
                 columnNames="tag"
-                constraintName="uk_user_tag"/>
+                constraintName="uk_users_tag"/>
 
         <addUniqueConstraint
-                tableName="user"
+                tableName="users"
                 columnNames="email"
-                constraintName="uk_user_email"/>
+                constraintName="uk_users_email"/>
         
-        <createIndex tableName="user" indexName="idx_user_email">
+        <createIndex tableName="users" indexName="idx_user_email">
             <column name="email"/>
         </createIndex>
 
-        <createIndex tableName="user" indexName="idx_user_tag">
+        <createIndex tableName="users" indexName="idx_users_tag">
             <column name="tag"/>
         </createIndex>
         
-        <createIndex tableName="user" indexName="idx_user_created_at">
+        <createIndex tableName="users" indexName="idx_users_created_at">
             <column name="created_at"/>
         </createIndex>
 
         <rollback>
 
-            <dropTable tableName="user"/>
+            <dropTable tableName="users"/>
 
         </rollback>
 
